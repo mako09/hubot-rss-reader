@@ -50,7 +50,7 @@ module.exports = class RSSChecker extends events.EventEmitter
       feedparser = new FeedParser
       req = request
         uri: args.url
-        timeout: 10000
+        timeout: 25000
 
       req.on 'error', (err) ->
         reject err
