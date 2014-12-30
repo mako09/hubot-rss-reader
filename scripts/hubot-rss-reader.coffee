@@ -49,7 +49,7 @@ module.exports = (robot) ->
       if room isnt entry.args.room and
          _.include feeds, entry.feed.url
         debug "#{entry.title} #{entry.url} => #{room}"
-        robot.messageRoom '#'+room, entry.toString()
+        robot.messageRoom room, entry.toString()
 
   checker.on 'error', (err) ->
     debug err
@@ -58,7 +58,7 @@ module.exports = (robot) ->
     last_state_is_error[err.feed.url] = true
     for room, feeds of checker.getAllFeeds()
       if _.include feeds, err.feed.url
-        robot.messageRoom '#'+room, "[ERROR] #{err.feed.url} - #{err.error.message or err.error}"
+        robot.messageRoom room, "[ERROR] #{err.feed.url} - #{err.error.message or err.error}"
 
   robot.respond /rss\s+(add|register)\s+(https?:\/\/[^\s]+)/im, (msg) ->
     url = msg.match[2].trim()
